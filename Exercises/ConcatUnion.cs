@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Exercises
 {
@@ -26,7 +27,6 @@ namespace Exercises
         public static IEnumerable<News> SelectRecentAndImportant(
             IEnumerable<News> newsCollection)
         {
-            //TODO your code goes here
             throw new NotImplementedException();
         }
 
@@ -58,8 +58,10 @@ namespace Exercises
         public static IEnumerable<int> GetPerfectSquares_Refactored(
             IEnumerable<int> numbers1, IEnumerable<int> numbers2)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            var firstSet = numbers1.Where(num => Math.Sqrt(num) % 1 == 0);
+            var secondSet = numbers2.Where(num => Math.Sqrt(num) % 1 == 0 && firstSet.Contains(num) == false);
+            var res =  firstSet.Concat(secondSet).OrderBy(number => number);
+            return res;
         }
 
         //do not modify this method

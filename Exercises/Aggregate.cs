@@ -21,8 +21,9 @@ namespace Exercises
         public static TimeSpan TotalActivityDuration(
             IEnumerable<int> activityTimesInSeconds)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            return activityTimesInSeconds.Aggregate(new TimeSpan(), 
+                (totalTimeSpan, timesInSeconds) =>
+                totalTimeSpan.Add(TimeSpan.FromSeconds(timesInSeconds)));
         }
 
         //Coding Exercise 2
@@ -40,7 +41,6 @@ namespace Exercises
          */
         public static string PrintAlphabet(int count)
         {
-            //TODO your code goes here
             throw new NotImplementedException();
         }
 
@@ -48,8 +48,8 @@ namespace Exercises
         //TODO implement this method
         public static IEnumerable<int> Fibonacci_Refactored(int n)
         {
-            //TODO your code goes here
             throw new NotImplementedException();
+
         }
 
         //do not modify this method

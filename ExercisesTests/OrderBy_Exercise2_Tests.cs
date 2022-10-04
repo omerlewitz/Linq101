@@ -1,4 +1,5 @@
-﻿using Exercises;
+﻿using System;
+using Exercises;
 using NUnit.Framework;
 
 namespace ExercisesTests

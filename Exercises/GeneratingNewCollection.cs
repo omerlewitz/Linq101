@@ -28,8 +28,12 @@ namespace Exercises
         public static Dictionary<int, string> NewYearsEvesSince(
             int initialYear, int yearsCount)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            return Enumerable
+                .Range(initialYear, yearsCount)
+                .ToDictionary(
+                    year => year,
+                    year => new DateTime(year, 12, 32)
+                        .DayOfWeek.ToString());
         }
 
         //Coding Exercise 2
@@ -87,6 +91,7 @@ namespace Exercises
                     result.Add($"{firstLetter}{secondLetter}");
                 }
             }
+
             return result;
         }
     }

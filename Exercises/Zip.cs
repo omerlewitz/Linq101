@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Exercises
@@ -37,8 +38,16 @@ namespace Exercises
             IEnumerable<int> months,
             IEnumerable<int> days)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            var enumerable = years as int[] ?? years.ToArray();
+            
+            var yearMonthPairs = enumerable.Zip(enumerable,
+                (year, month) => new { year, month });
+           
+            return yearMonthPairs.Zip(days,
+                (yearMonthPair, day) => 
+                    new DateTime(yearMonthPair.year, yearMonthPair.month, day))
+                .OrderByDescending(date => date);
+
         }
 
         //Coding Exercise 2
@@ -62,8 +71,16 @@ namespace Exercises
             GetDaysDifferencesBetweenDates(
                 IEnumerable<DateTime> dates)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            var dateTimes = dates as DateTime[] ?? dates.ToArray();
+            return dateTimes.Zip(dateTimes.Skip(1),
+                ((first, second) => new
+                {
+                    FirstDate = first,
+                    SecondDate = second,
+                    Difference = (second -first).TotalDays 
+                }))
+                .Select(dateTime => 
+                    $"It's been {dateTime.Difference} days between {dateTime.FirstDate.ToString("yyyy-MM-dd")} and {dateTime.SecondDate.ToString("yyyy-MM-dd")}");
         }
 
         //Refactoring challenge
