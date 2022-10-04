@@ -11,8 +11,7 @@ namespace Exercises
         //which checks if all numbers in the collection are divisible by 10.
         public static bool AreAllNumbersDivisibleBy10(int[] numbers)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            return numbers.All(number => number % 10 == 0);
         }
 
         //Coding Exercise 2
@@ -20,22 +19,25 @@ namespace Exercises
         //if all Pets in the collection are of the same PetType.
         public static bool AreAllPetsOfTheSameType(IEnumerable<Pet> pets)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            // return
+            //     pets.All(pet => pet.PetType is PetType.Cat) ||
+            //     pets.All(pet => pet.PetType is PetType.Dog) ||
+            //     pets.All(pet => pet.PetType is PetType.Fish);
+            var allPetsTypes = Enum.GetValues(typeof(PetType)).Cast<PetType>();
+            return allPetsTypes.Any(petType => pets.All(pet => pet.PetType == petType));
+          
         }
 
         //Refactoring challenge
-        //TODO implement this method
         public static bool AreAllWordsOfTheSameLength_Refactored(List<string> words)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            return words.All(word => word.Length == words[0].Length);
         }
 
         //do not modify this method
         public static bool AreAllWordsOfTheSameLength(List<string> words)
         {
-            if (words.Count == 0 || words.Count == 1)
+            if (words.Count is 0 or 1)
             {
                 return true;
             }

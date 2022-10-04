@@ -20,8 +20,14 @@ namespace Exercises
          */
         public static IEnumerable<int> TakeSome(IEnumerable<int> numbers)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            var enumerable = numbers as int[] ?? numbers.ToArray();
+            var count = enumerable.Length;
+            return count switch
+            {
+                < 10 => enumerable.Take(3),
+                < 100 => enumerable.Take(30),
+                _ => enumerable
+            };
         }
 
         //Coding Exercise 2
@@ -44,17 +50,14 @@ namespace Exercises
         public static IEnumerable<Pet> GetGivenPercentOfHeaviestPets(
             IEnumerable<Pet> pets, int percent)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            var enumerable = pets as Pet[] ?? pets.ToArray();
+            return enumerable.OrderByDescending(pet => pet.Weight).Take(enumerable.Length * percent / 100);
         }
 
-        //Refactoring challenge
-        //TODO implement this method
         public static IEnumerable<DateTime> GetDatesBeforeXXCentury_Refactored(
             IEnumerable<DateTime> dates)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            return dates.TakeWhile(time => time.Year < 1901);
         }
 
         //do not modify this method

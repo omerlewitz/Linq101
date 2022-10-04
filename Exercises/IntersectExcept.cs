@@ -24,8 +24,11 @@ namespace Exercises
             IEnumerable<string> words1,
             IEnumerable<string> words2)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            return words1
+                .Select(word => word.ToLower())
+                .Intersect(
+                    words2.Select(word => word.ToLower()))
+                .Count();
         }
 
         //Coding Exercise 2
@@ -45,8 +48,10 @@ namespace Exercises
             IEnumerable<int> numbers1,
             IEnumerable<int> numbers2)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            var enumerable = numbers2 as int[] ?? numbers2.ToArray();
+            var second = numbers1 as int[] ?? numbers1.ToArray();
+            var res= second.Except(enumerable).Union(enumerable.Except(second)).OrderBy(number => number);
+            return res;
         }
 
         //Refactoring challenge
@@ -61,7 +66,7 @@ namespace Exercises
 
         //do not modify this method
         public static IEnumerable<string> GetRoutesInfo(
-           Route route1, Route route2)
+            Route route1, Route route2)
         {
             var result = new List<string>();
             var sharedPoints = new List<RoutePoint>();
@@ -75,12 +80,13 @@ namespace Exercises
                         {
                             sharedPoints.Add(routePoint1);
                             result.Add($"Shared point " +
-                            $"{routePoint1.Name}" +
-                            $" at {routePoint1.Point}");
+                                       $"{routePoint1.Name}" +
+                                       $" at {routePoint1.Point}");
                         }
                     }
                 }
             }
+
             foreach (var routePoint in route1.RoutePoints)
             {
                 if (!sharedPoints.Contains(routePoint))
@@ -91,6 +97,7 @@ namespace Exercises
                         $" at {routePoint.Point}");
                 }
             }
+
             foreach (var routePoint in route2.RoutePoints)
             {
                 if (!sharedPoints.Contains(routePoint))
@@ -108,6 +115,7 @@ namespace Exercises
         public class Route
         {
             public IEnumerable<RoutePoint> RoutePoints { get; }
+
             public Route(IEnumerable<RoutePoint> routePoints)
             {
                 RoutePoints = routePoints;
@@ -118,20 +126,24 @@ namespace Exercises
                 return $"RoutePoints: ({string.Join("; ", RoutePoints)})";
             }
         }
+
         public struct RoutePoint
         {
             public string Name { get; }
             public Point Point { get; }
+
             public RoutePoint(string name, Point point)
             {
                 Name = name;
                 Point = point;
             }
+
             public override string ToString()
             {
                 return $"{Name} ({Point})";
             }
         }
+
         public struct Point
         {
             public double X { get; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Exercises
 {
@@ -28,8 +29,16 @@ namespace Exercises
          */
         public static IEnumerable<string> AddStartAndEndMarkers(IEnumerable<string> words)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            const string Start = "START";
+            const string End = "END";
+            
+            var withStart = words.First() == Start ?
+                words :
+                words.Prepend(Start);
+            
+            return withStart.Last() == End ?
+                withStart :
+                withStart.Append(End);
         }
 
         //Coding Exercise 2
@@ -60,8 +69,8 @@ namespace Exercises
         public static IEnumerable<string> TrimSentenceAndChangeEndMarker_Refactored(
             IEnumerable<string> words)
         {
-            //TODO your code goes here
-            throw new NotImplementedException();
+            var res = words.TakeWhile(word => word != "The end");
+            return res;
         }
 
         //do not modify this method
@@ -79,6 +88,7 @@ namespace Exercises
                     break;
                 }
             }
+
             result.Add("END");
             return result;
         }
